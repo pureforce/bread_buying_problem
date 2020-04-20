@@ -139,38 +139,4 @@ def calculate_purchasing_plan(total_days, sellers, starting_bread=10, best_befor
     return buying_plan[1:] # First value shows initial bread.
 
 if __name__ == "__main__":
-    print("1",calculate_purchasing_plan_old(60, [(10, 200), (15, 100), (35, 500), (50, 30)]))  # Example
     print("2",calculate_purchasing_plan(60, [(10, 200), (15, 100), (35, 500), (50, 30)]))  # Example
-    print("1",calculate_purchasing_plan_old(30, [(10, 200), (15, 100), (35, 500), (50, 30)]))  # Shorter period
-    print("2",calculate_purchasing_plan(30, [(10, 200), (15, 100), (35, 500), (50, 30)]))  # Shorter period
-    print("1",calculate_purchasing_plan_old(90, [(10, 200), (15, 100), (35, 500), (50, 30)]))  # Invalid last period
-    print("2",calculate_purchasing_plan(90, [(10, 200), (15, 100), (35, 500), (50, 30)]))  # Invalid last period
-    print("1",calculate_purchasing_plan_old(60, [(11, 200), (15, 100), (35, 500), (50, 30)]))  # Invalid start
-    print("2",calculate_purchasing_plan(60, [(11, 200), (15, 100), (35, 500), (50, 30)]))  # Invalid start
-    print("1",calculate_purchasing_plan_old(60, [(10, 200), (15, 100), (50, 500), (50, 30)]))  # Invalid 3rd
-    print("2",calculate_purchasing_plan(60, [(10, 200), (15, 100), (50, 500), (50, 30)]))  # Invalid 3rd
-    print("1",calculate_purchasing_plan_old(60, [(10, 200), (15, 100), (16, 100), (35, 500), (50, 30)]))  # Same price
-    print("2",calculate_purchasing_plan(60, [(10, 200), (15, 100), (16, 100), (35, 500), (50, 30)]))  # Same price
-    print("1",calculate_purchasing_plan_old(60, [(10, 200), (15, 100), (15, 100), (35, 500), (50, 30)]))  # Same price same day
-    print("2",calculate_purchasing_plan(60, [(10, 200), (15, 100), (15, 100), (35, 500), (50, 30)]))  # Same price same day
-    print("1",calculate_purchasing_plan_old(60, [(10, 200), (15, 150), (15, 100), (35, 500), (50, 30)]))  # Reverse order price
-    print("2",calculate_purchasing_plan(60, [(10, 200), (15, 150), (15, 100), (35, 500), (50, 30)]))  # Reverse order price
-    print("1",calculate_purchasing_plan_old(60, [(10,200),(10,200),(10,200),(11,200),(15,100),(35,500),(50,30)]))
-    print("2",calculate_purchasing_plan(60, [(10,200),(10,200),(10,200),(11,200),(15,100),(35,500),(50,30)]))
-    print("1",calculate_purchasing_plan_old(60, [(10,200), (10,200), (10,200), (11,200), (15,100), (35,500), (50,30)]))
-    print("2",calculate_purchasing_plan(60, [(10,200), (10,200), (10,200), (11,200), (15,100), (35,500), (50,30)]))
-    print()
-    print("1",calculate_purchasing_plan(50, [(5, 100), (10, 100), (15, 100), (45, 50)], 5))
-    print("2",calculate_purchasing_plan_old(50, [(5, 100), (10, 100), (15, 100), (45, 50)], 5))
-    print("1",calculate_purchasing_plan(50, [(5, 100), (10, 100), (20, 100), (45, 100)], 5))
-    print("2",calculate_purchasing_plan_old(50, [(5, 100), (10, 100), (20, 100), (45, 100)], 5))
-    print("1",calculate_purchasing_plan(50, [(5, 100), (10, 100), (15, 100), (40, 50)], 5))
-    print("2",calculate_purchasing_plan_old(50, [(5, 100), (10, 100), (15, 100), (40, 50)], 5))
-    print()
-    print(calculate_purchasing_plan(10, [(1, 4), (3, 4), (5, 4), (7, 4)], 1, 4, True), "[4, 2, 0, 3]")
-    print(calculate_purchasing_plan(10, [(0, 4), (3, 4), (6, 4), (6, 4)], 0, 4, True), "[4, 3, 3, 0]")
-    print(calculate_purchasing_plan(7, [(0, 4), (1, 4), (2, 4), (3, 4)], 0, 4, True), "[4, 0, 0, 3]")
-    print(calculate_purchasing_plan(7, [(0, 4), (1, 4), (2, 2), (3, 4)], 5, 4, True), "[0, 0, 1, 1]")
-    print(calculate_purchasing_plan(16, [(2, 5), (4, 3), (6, 1), (10, 20), (10, 15), (12, 4)], 3, 4, True), "[1, 2, 4, 0, 2, 4]")
-    print(calculate_purchasing_plan(13, [(0, 1), (3, 1), (5, 3), (9, 5)], 0, 4, True), "[4, 3, 2, 4]")
-    print(calculate_purchasing_plan(13, [(0, 1), (3, 1), (5, 3), (10, 5)], 0, 4, True), "None")
