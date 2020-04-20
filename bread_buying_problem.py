@@ -9,6 +9,35 @@ Assumptions 1: Solution assumes that given sellers list is ordered by the arriva
 sorting needs to be done first.
 Assumption 2: I assume input arguments are valid and therefore don't check for None values, strings instead of integers.
 
+Idea of the solution: There needs to be one piece of bread per day for the duration of experiment. We can represent the
+task as grid of dimensions #merchants * #days. We populate the matrix with prices for each merchant on the days that his
+bread is available, if a bread from a merchant is not available on a selected day we assign infinite value to it. Each
+column thus shows prices of different bread available on that day, if a column only has "inf" values, it means that
+solution does not exist. To find a optimal solution we start in the last column. We find the merchant with lowest price,
+if multiple merchants have same price on that day we select the one that is up-most. After we have a merchant selected
+we go left as far as possible (either to the day when he arrives or another merchant provides bread with lower price).
+When we change the merchant we again go up as far as possible and then left, repeating the process until we are in the
+top left corner. This gives us solution with lowest price and fewest number of merchants, but the problem is that this
+solution favours buying bread as late as possible (since we go from right to left). In order to fix this, we move
+through selected merchants from left to right, but now we buy as much bread from the first selected merchant (if the
+price is the same). After we are in the bottom right corner again, we have lowest price, with fewest merchants and most
+stale bread (strange, villagers, preferring stale over fresh bread :))
+
+The time complexity of the algorithm is O(m * n) + O(m) = O(m * n), where m is # of days and n is # of sellers.
+
+From right to left (assuming bread lasts 3 days)
+1. |  5  5  5  i  i  i  i  i  |->|  5  5  5  i  i  i  i  i  |->|  5  5  5  i  i  i  i  i  |->|  x  x  x  i  i  i  i  i |
+2. |  i  i  5  5  5  i  i  i  |->|  i  i  5  5  5  i  i  i  |->|  i  i  5  5  5  i  i  i  |->|  i  i  5  5  5  i  i  i |
+3. |  i  i  i  4  4  4  i  i  |->|  i  i  i  4  4  4  i  i  |->|  i  i  i  x  x  4  i  i  |->|  i  i  i  x  x  4  i  i |
+4. |  i  i  i  i  4  4  4  i  |->|  i  i  i  i  4  4  4  i  |->|  i  i  i  i  4  4  4  i  |->|  i  i  i  i  4  4  4  i |
+5. |  i  i  i  i  i  4  4  4  |->|  i  i  i  i  i  x  x  x  |->|  i  i  i  i  i  x  x  x  |->|  i  i  i  i  i  x  x  x |
+This gives us solution [3, 0, 2, 0, 3], minimum price and lowest #of merchants but not the stalest of bread.
+1. |  y  y  y  i  i  i  i  i  |->|  y  y  y  i  i  i  i  i  |->|  y  y  y  i  i  i  i  i  |
+2. |  i  i  -  -  -  i  i  i  |->|  i  i  -  -  -  i  i  i  |->|  i  i  -  -  -  i  i  i  |
+3. |  i  i  i  4  4  4  i  i  |->|  i  i  i  y  y  y  i  i  |->|  i  i  i  y  y  y  i  i  |
+4. |  i  i  i  i  -  -  -  i  |->|  i  i  i  i  -  -  -  i  |->|  i  i  i  i  -  -  -  i  |
+5. |  i  i  i  i  i  4  4  4  |->|  i  i  i  i  i  4  4  4  |->|  i  i  i  i  i  4  y  y  |
+This gives us [3, 0, 3, 0, 2], lowest price, lowest # merchants, stalest bread.
 """
 
 def calculate_purchasing_plan_old(total_days, sellers, starting_bread=10):
